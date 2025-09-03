@@ -1,0 +1,87 @@
+{
+  "name": "hsd",
+  "version": "8.0.0",
+  "description": "Cryptocurrency bike-shed",
+  "license": "MIT",
+  "repository": "git://github.com/handshake-org/hsd.git",
+  "homepage": "https://github.com/handshake-org/hsd",
+  "bugs": {
+    "url": "https://github.com/handshake-org/hsd/issues"
+  },
+  "author": "Christopher Jeffrey <chjjeffrey@gmail.com>",
+  "keywords": [
+    "blockchain",
+    "cryptocurrency",
+    "handshake",
+    "hns",
+    "wallet"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "@handshake-org/bfilter": "~2.3.0",
+    "bcfg": "~0.2.2",
+    "bcrypto": "~5.4.0",
+    "bcurl": "~0.2.1",
+    "bdb": "~1.6.2",
+    "bdns": "~0.1.5",
+    "bevent": "~0.1.6",
+    "bfile": "~0.2.3",
+    "bheep": "~0.1.6",
+    "binet": "~0.3.9",
+    "blgr": "~0.2.1",
+    "blru": "~0.1.8",
+    "blst": "~0.1.6",
+    "bmutex": "~0.1.8",
+    "bns": "~0.15.0",
+    "bsert": "~0.0.13",
+    "bsock": "~0.1.11",
+    "bsocks": "~0.2.6",
+    "btcp": "~0.1.5",
+    "buffer-map": "~0.0.8",
+    "bufio": "~1.2.3",
+    "bupnp": "~0.2.6",
+    "bval": "~0.1.8",
+    "bweb": "~0.2.0",
+    "goosig": "~0.10.0",
+    "n64": "~0.2.10",
+    "urkel": "~1.0.3"
+  },
+  "devDependencies": {
+    "bmocha": "^2.2.1",
+    "bslintrc": "^0.0.3"
+  },
+  "main": "./lib/hsd.js",
+  "bin": {
+    "hsd": "./bin/hsd",
+    "hsd-node": "./bin/node",
+    "hsd-spvnode": "./bin/spvnode",
+    "hs-seeder": "./bin/hs-seeder",
+    "hs-wallet": "./bin/hsw",
+    "hsd-cli": "./bin/hsd-cli",
+    "hsd-rpc": "./bin/hsd-rpc",
+    "hsw-cli": "./bin/hsw-cli",
+    "hsw-rpc": "./bin/hsw-rpc"
+  },
+  "scripts": {
+    "build-docs": "jsdoc -c jsdoc.json",
+    "lint": "eslint $(cat .eslintfiles)",
+    "lint-file": "eslint",
+    "test": "bmocha --reporter spec test/*.js",
+    "test-browser": "NODE_BACKEND=js bmocha --reporter spec test/*.js",
+    "test-file": "bmocha --reporter spec",
+    "test-file-browser": "NODE_BACKEND=js bmocha --reporter spec",
+    "test-ci": "nyc --reporter lcov bmocha -- --reporter spec test/*.js"
+  },
+  "browser": {
+    "./lib/covenants/reserved": "./lib/covenants/reserved-browser.js",
+    "./lib/covenants/locked": "./lib/covenants/locked-browser.js",
+    "./lib/hd/nfkd": "./lib/hd/nfkd-compat.js",
+    "./lib/hd/wordlist": "./lib/hd/wordlist-browser.js",
+    "./lib/workers/child": "./lib/workers/child-browser.js",
+    "./lib/workers/parent": "./lib/workers/parent-browser.js",
+    "./lib/hsd": "./lib/hsd-browser.js",
+    "./lib/blockstore/index.js": "./lib/blockstore/index-browser.js"
+  }
+}
