@@ -1,6 +1,7 @@
 #! /bin/sh
 
 docker run --read-only -it \
+	--env HSD_LOG_LEVEL=warning \
 	-v /opt/hsd-data:/opt/hsd-data \
 	-p 127.0.0.1:153:153 \
 	-p 127.0.0.1:253:253 \

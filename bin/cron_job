@@ -1,0 +1,6 @@
+#! /bin/sh
+
+logger -t "data-clear[$$]" "Cron job"
+if ! test $(expr $RANDOM % 100) -eq 0 ; then exit 0; fi
+logger -t "data-clear[$$]" "Cleaning data"
+/usr/local/hsd/bin/hsd-rpc compacttree

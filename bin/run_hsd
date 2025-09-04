@@ -3,10 +3,11 @@
 log="info"
 if test "${HSD_LOG_LEVEL}"; then log="${HSD_LOG_LEVEL}"; fi
 
+if test -z "${HSD_ADDITIONAL_PARAMS}"; then HSD_ADDITIONAL_PARAMS="--no-sig0 --no-wallet"; fi
+
 exec /usr/local/hsd/bin/hsd \
 	--chain-migrate=4 --wallet-migrate=7 \
 	--prefix=/opt/hsd-data/ \
 	--ns-host 0.0.0.0 --ns-port 153 \
 	--rs-host 0.0.0.0 --rs-port 253 \
-	--no-sig0 \
-	--log-level=${log} 2>&1 | logger -t hsd
+	${HSD_ADDITIONAL_PARAMS} --log-level=${log} 2>&1 | logger -t hsd

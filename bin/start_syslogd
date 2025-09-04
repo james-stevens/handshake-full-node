@@ -1,0 +1,8 @@
+#! /bin/sh
+
+if test "${HSD_SYSLOG_SERVER}"
+	then
+		exec /sbin/syslogd -n -R ${HSD_SYSLOG_SERVER}
+	else
+		exec /sbin/syslogd -n -O -
+	fi
