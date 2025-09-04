@@ -1,2 +1,3 @@
 ::respawn:/usr/local/bin/start_syslogd
 ::respawn:/usr/local/bin/run_hsd
+::respawn:/usr/sbin/crond -f -l 9
