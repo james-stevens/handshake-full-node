@@ -21,3 +21,8 @@ Parameters added to `hsd` when started up. Specfying this var will override the 
 ### HSD_LOG_LEVEL
 
 Log level for `hsd` - if omitted, defaults to `info`
+
+
+# Docker.com
+
+https://hub.docker.com/r/jamesstevens/handshake-full-node
