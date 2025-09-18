@@ -39,7 +39,8 @@ with ones you have built yourself, it's REALLY easy.
 
 Now in the same directory you should have a directory called `hsd`
 
-- In a clone of this repo, remove the directory `hsd` and replace it with yor new `hsd` directory
-- In the repo clone now run `./dkmk` to rebuild the container
+- Clone this repo
+- `cd` into the clone & remove the directory `hsd` (`rm -rf ./hsd`) and copy in your new `hsd` directory (`cd hsd-<version>; cp -a hsd <clone-directory>`)
+- `cd` back into the repo clone and run `./dkmk` to rebuild the container
 
 If you want to be certain your new container is 100% freshly built, run `./dkmk --no-cache`
