@@ -40,7 +40,8 @@ with ones you have built yourself, it's REALLY easy.
 Now in the same directory you should have a directory called `hsd`
 
 - Clone this repo
-- Copy your entire `hsd-<version>` into this repo (`cd handshake-full-node; cp -a /path/to/hsd-<version> .`)
+- Copy your entire `hsd-<version>` into this repo 
+	`cd handshake-full-node; cp -a /path/to/hsd-<version> .`
 - Edit `Dockerfile` to change `COPY hsd-8.0.0/hsd /usr/local/hsd/` to the version you just copied in
 - Run `./dkmk` to rebuild the container
 
