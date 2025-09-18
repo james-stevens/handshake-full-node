@@ -51,6 +51,8 @@ If you want to be certain your new container is 100% freshly built, run `./dkmk 
 
 If you are using the same version (v8.0.0), but just want to use your own buuld, I recommend you remove my
 `hsd-8.0.0` directory before copying in yours, so you can be certain it's your build that will go
-into the container (`cd handshake-full-node; rm -rf hsd-8.0.0; cp -a /path/to/hsd-8.0.0 .`)
+into the container.
+
+		cd handshake-full-node; rm -rf hsd-8.0.0; cp -a /path/to/hsd-8.0.0 .
 
 Obviously, if you aren't changing the verion of `hsd`, you can omit the `Dockerfile` edit step.
