@@ -40,7 +40,14 @@ with ones you have built yourself, it's REALLY easy.
 Now in the same directory you should have a directory called `hsd`
 
 - Clone this repo
-- `cd` into the clone & remove the directory `hsd` (`rm -rf ./hsd`) and copy in your new `hsd` directory (`cd hsd-<version>; cp -a hsd <clone-directory>`)
-- `cd` back into the repo clone and run `./dkmk` to rebuild the container
+- Copy your `hsd-<version>` into this repo
+- Edit `Dockerfile` to change `COPY hsd-8.0.0/hsd /usr/local/hsd/` to the version you just copied in
+- Run `./dkmk` to rebuild the container
 
 If you want to be certain your new container is 100% freshly built, run `./dkmk --no-cache`
+
+If you are using the same version (v8.0.0), but just want to use your own buuld, I recommend you remove my
+`hsd-8.0.0` directory before copying in yours, so you can be certain it's your build that will go
+into the container.
+
+Obviously, if you aren't changign the verion of hsd, you can omit the Dockerfile edit step.
