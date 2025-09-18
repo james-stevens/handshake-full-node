@@ -8,6 +8,15 @@ Auth ROOT listens on port 153, Resolver listens on 253
 
 By default, runs with `--no-sig0 --no-wallet`
 
+# Data Directory
+
+This container is designed to [run read-only](dkrun) and you will want your `hsd-data` to be persistant
+when the container is restarted, or it will have to reclone the entire blockchain every time it restarts.
+
+So you will need to map some persistant storage into this container at the mount point `/opt/hsd-data`.
+If you are mapping a directory from your docker host into the container, I found the host directory needs to
+be `chmod 777`.
+
 
 ## Env Vars
 
@@ -63,3 +72,9 @@ into the container.
 		cd handshake-full-node; rm -rf hsd-8.0.0; cp -a /path/to/hsd-8.0.0 .
 
 Obviously, if you aren't changing the verion of `hsd`, you can omit the `Dockerfile` edit step.
+
+## IMPORTANT
+
+NOTE: As described in the v8.0.0 release notes, I include the options `--chain-migrate=4 --wallet-migrate=7` 
+in the [run_hsd](bin/run_hsd) start script, so if you change to a different version, these options would 
+may also need to change, by editing that start script before you rebuild the container.
