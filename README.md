@@ -30,11 +30,11 @@ https://hub.docker.com/r/jamesstevens/handshake-full-node
 
 # Upgrading Handshake
 
-If you want to upgrade `hsd`, or simply prefer to replace the binaries I have built
+If you want to upgrade the version of `hsd` in this container, or simply prefer to replace the binaries I have built
 with ones you have built yourself, it's REALLY easy.
 
 - Download the `hsd` [release](https://github.com/handshake-org/hsd/releases) of your choice
-- Un-tar it onto a dev server running the same version of [Alpine Linux](https://alpinelinux.org/downloads/) as specified in my (Dockerfile)[Dockerfile] (currently v3.22)
+- Un-tar it onto a dev server running the same version of [Alpine Linux](https://alpinelinux.org/downloads/) as specified in my [Dockerfile](Dockerfile) (currently v3.22)
 - cd into the `hsd-<version>` directory `tar` just created & run `./build`
 
 Now in the same directory you should have a directory called `hsd`
