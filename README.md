@@ -8,6 +8,15 @@ Auth ROOT listens on port 153, Resolver listens on 253
 
 By default, runs with `--no-sig0 --no-wallet`
 
+# Data Directory
+
+This container is designed to [run read-only](dkrun) and you will want your `hsd-data` to be persistant
+when the container is restarted, or it will have to reclone the entire blockchain every time it restarts.
+
+So you will need to map some persistant storage into this container at the mount point `/opt/hsd-data`.
+If you are mapping a directory from your docker host into the container, I found the host directory needs to
+be `chmod 777`.
+
 
 ## Env Vars
 
