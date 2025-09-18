@@ -40,7 +40,7 @@ with ones you have built yourself, it's REALLY easy.
 Now in the same directory you should have a directory called `hsd`
 
 - Clone this repo
-- Copy your `hsd-<version>` into this repo
+- Copy your entire `hsd-<version>` into this repo (`cd handshake-full-node; cp -a /path/to/hsd-<version> .`)
 - Edit `Dockerfile` to change `COPY hsd-8.0.0/hsd /usr/local/hsd/` to the version you just copied in
 - Run `./dkmk` to rebuild the container
 
@@ -48,6 +48,6 @@ If you want to be certain your new container is 100% freshly built, run `./dkmk 
 
 If you are using the same version (v8.0.0), but just want to use your own buuld, I recommend you remove my
 `hsd-8.0.0` directory before copying in yours, so you can be certain it's your build that will go
-into the container.
+into the container (`cd handshake-full-node; rm -rf hsd-8.0.0; cp -a /path/to/hsd-8.0.0 .`)
 
-Obviously, if you aren't changign the verion of hsd, you can omit the Dockerfile edit step.
+Obviously, if you aren't changing the verion of `hsd`, you can omit the `Dockerfile` edit step.
