@@ -30,6 +30,12 @@ if test -f /run/pems/server.pem
 echo ""
 echo 'newServer({address="127.0.0.1:5350", pool="recursive-pool"})'
 echo 'newServer({address="127.0.0.1:5349", pool="auth-pool"})'
+echo ''
+echo 'pc_rec = newPacketCache(20000, {maxTTL=86400, minTTL=0, temporaryFailureTTL=60, staleTTL=60, dontAge=false})'
+echo 'getPool("recursive-pool"):setCache(pc_rec)'
+echo 'pc_auth = newPacketCache(20000, {maxTTL=86400, minTTL=0, temporaryFailureTTL=60, staleTTL=60, dontAge=false})'
+echo 'getPool("auth-pool"):setCache(pc_auth)'
+
 
 for ip in ${HSD_NEIGHBOURS}
 	do

@@ -3,15 +3,18 @@
 log="info"
 if test "${HSD_LOG_LEVEL}"; then log="${HSD_LOG_LEVEL}"; fi
 
-if test -z "${HSD_ADDITIONAL_PARAMS}"; then HSD_ADDITIONAL_PARAMS="--no-sig0 --no-wallet"; fi
+extra="--no-sig0 --no-wallet"
+if test "${HSD_ADDITIONAL_PARAMS}"; then extra="${HSD_ADDITIONAL_PARAMS}"; fi
 
 dir="/opt/data/hsd"
 mkdir -p ${dir}
 chown -R hsd: ${dir}
 
+listen="--ns-host 0.0.0.0 --rs-host 0.0.0.0"
 migrate="--chain-migrate=4 --wallet-migrate=7"
 data_dir="--prefix=${dir}"
 log_level="--log-level=${log}"
 
-exec su -s /bin/sh hsd -c \
-	"exec /usr/local/hsd/bin/hsd ${migrate} ${data_dir} ${HSD_ADDITIONAL_PARAMS} ${log_level} 2>&1 | logger -t hsd"
+params="${listen} ${migrate} ${data_dir} ${extra} ${log_level}"
+
+exec su -s /bin/sh hsd -c "exec /usr/local/hsd/bin/hsd ${params} 2>&1 | logger -t hsd"

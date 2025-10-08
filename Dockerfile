@@ -16,11 +16,11 @@ RUN addgroup -g 850 -S hsd
 RUN adduser -u 850 -S -G hsd hsd
 
 COPY hsd-8.0.0/hsd /usr/local/hsd/
-COPY bin /usr/local/bin/
 
+COPY haproxy.cfg /etc/haproxy/
 COPY inittab /etc/inittab
 COPY root_cron /var/spool/cron/crontabs/root
-COPY haproxy.cfg /etc/haproxy/
+COPY bin /usr/local/bin/
 
 RUN rm -f /var/cache/apk/*
 CMD [ "/sbin/init" ]
