@@ -1,8 +1,14 @@
 #! /bin/sh
 
+
+ip="192.168.1.145"
+
 docker run --read-only -it \
+	--ulimit nofile=11000:11000 \
+	--env SYSLOG_STDOUT=Y \
 	--env HSD_LOG_LEVEL=warning \
-	-v /opt/hsd-data:/opt/hsd-data \
-	-p 127.0.0.1:153:153 \
-	-p 127.0.0.1:253:253 \
+	-v /opt/data/handshake-full-node:/opt/data \
+	-p ${ip}:53:53/udp -p ${ip}:53:53 \
+	-p ${ip}:5350:5350/udp -p ${ip}:5349:5349/udp \
+	-p ${ip}:80:80 -p ${ip}:443:443 \
 	handshake-full-node $*

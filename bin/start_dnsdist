@@ -1,0 +1,44 @@
+#! /bin/sh
+
+if test -f /opt/data/pems/server.pem
+	then
+		mkdir -p /run/pems
+		cp -a /opt/data/pems/server.pem /run/pems/server.pem
+	fi
+
+
+{
+echo 'setACL("0.0.0.0/0")'
+echo 'addLocal("0.0.0.0:53")'
+echo ''
+if test "${DNSDIST_STATS_KEY}" -a "${DNSDIST_STATS_ACL}"
+	then
+		echo 'webserver("0.0.0.0:8083")'
+		echo "setWebserverConfig({password=hashPassword(\"${DNSDIST_STATS_KEY}\"), apiKey=hashPassword(\"${DNSDIST_STATS_KEY}\"), acl=\"${DNSDIST_STATS_ACL}\"})"
+	fi
+echo ''
+echo 'addAction(RDRule(), PoolAction("recursive-pool"))'
+echo 'addAction(NotRule(RDRule()), PoolAction("auth-pool"))'
+echo ''
+echo 'addDOHLocal("0.0.0.0:800",{},{},"/")'
+
+if test -f /run/pems/server.pem
+	then
+		echo 'addDOHLocal("0.0.0.0:443",{ "/run/pems/server.pem"},{"/run/pems/server.pem"},"/")'
+	fi
+
+echo ""
+echo 'newServer({address="127.0.0.1:5350", pool="recursive-pool"})'
+echo 'newServer({address="127.0.0.1:5349", pool="auth-pool"})'
+
+for ip in ${HSD_NEIGHBOURS}
+	do
+		echo "newServer({address=\"${ip}:5350\", pool=\"recursive-pool\"})"
+		echo "newServer({address=\"${ip}:5349\", pool=\"auth-pool\"})"
+	done
+
+} > /run/dnsdist.conf
+
+/usr/bin/dnsdist --config /run/dnsdist.conf --check-config | logger -t start_dnsdist
+
+exec /usr/bin/dnsdist --config /run/dnsdist.conf --supervised >/dev/null 2>&1
