@@ -1,5 +1,7 @@
 #! /bin/sh
 
+cache_size="${HSD_CACHE_SIZE:-100000}"
+
 if test -f /opt/data/pems/server.pem
 	then
 		mkdir -p /run/pems
@@ -31,9 +33,9 @@ echo ""
 echo 'newServer({address="127.0.0.1:5350", pool="recursive-pool"})'
 echo 'newServer({address="127.0.0.1:5349", pool="auth-pool"})'
 echo ''
-echo 'pc_rec = newPacketCache(20000, {maxTTL=86400, minTTL=0, temporaryFailureTTL=60, staleTTL=60, dontAge=false})'
+echo 'pc_rec = newPacketCache('"${cache_size}"', {maxTTL=86400, minTTL=0, temporaryFailureTTL=60, staleTTL=60, dontAge=false})'
 echo 'getPool("recursive-pool"):setCache(pc_rec)'
-echo 'pc_auth = newPacketCache(20000, {maxTTL=86400, minTTL=0, temporaryFailureTTL=60, staleTTL=60, dontAge=false})'
+echo 'pc_auth = newPacketCache('"${cache_size}"', {maxTTL=86400, minTTL=0, temporaryFailureTTL=60, staleTTL=60, dontAge=false})'
 echo 'getPool("auth-pool"):setCache(pc_auth)'
 
 

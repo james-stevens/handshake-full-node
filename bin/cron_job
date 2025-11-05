@@ -1,6 +1,13 @@
 #! /bin/sh
 
-logger -t "data-clear[$$]" "Cron job"
+src="/opt/data/pems/server.pem"
+dst="/run/pems/server.pem"
+if test -f ${src} -a -f ${dst} -a ${src} -nt ${dst}
+    then
+		cp -a ${src} ${dst}
+		killall -HUP dnsdist
+	fi
+
 if ! test $(expr $RANDOM % 100) -eq 0 ; then exit 0; fi
 logger -t "data-clear[$$]" "Cleaning data"
 /usr/local/hsd/bin/hsd-rpc compacttree
