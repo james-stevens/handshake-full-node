@@ -287,7 +287,7 @@ loglvl_t level = MSG_NORMAL|MSG_DEBUG|MSG_STDOUT|MSG_FILE_LINE;
 
 	if (!server_ni.port) server_ni.port = SERVER_PORT;
 	if (!rd_zero_ni.port) rd_zero_ni.port = AUTH_PORT;
-	if (!rd_one_ni.port) rd_zero_ni.port = REC_PORT;
+	if (!rd_one_ni.port) rd_one_ni.port = REC_PORT;
 
 	logmsg(MSG_DEBUG,"one %s:%d\n",IPCHAR(rd_one_ni),rd_one_ni.port);
 	logmsg(MSG_DEBUG,"zero %s:%d\n",IPCHAR(rd_zero_ni),rd_zero_ni.port);

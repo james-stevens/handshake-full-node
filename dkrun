@@ -4,14 +4,9 @@
 ip="192.168.1.145"
 
 docker run --read-only -it \
-	--ulimit nofile=11000:11000 \
-	--env DNSDIST_STATS_KEY=MyPassword \
-	--env "DNSDIST_STATS_ACL=0.0.0.0/0" \
 	--env SYSLOG_STDOUT=Y \
 	--env HSD_LOG_LEVEL=warning \
 	-v /opt/data/handshake-full-node:/opt/data \
 	-p ${ip}:53:53/udp -p ${ip}:53:53 \
 	-p ${ip}:5350:5350/udp -p ${ip}:5349:5349/udp \
-	-p ${ip}:80:80 -p ${ip}:443:443 \
-	-p ${ip}:8083:8083 \
 	handshake-full-node $*

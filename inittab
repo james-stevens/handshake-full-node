@@ -1,5 +1,4 @@
 ::respawn:/usr/local/bin/start_syslogd
 ::respawn:/usr/local/bin/run_hsd
-::respawn:/usr/local/bin/start_dnsdist
-::respawn:/usr/sbin/haproxy -f /etc/haproxy/haproxy.cfg
+::respawn:/usr/local/bin/rd_bit_proxy -l x400003 -i 60 -s 0.0.0.0:53 -a 127.0.0.1 -r 127.0.0.1
 ::respawn:/usr/sbin/crond -f -l 9 -S
