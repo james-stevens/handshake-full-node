@@ -5,6 +5,7 @@ RUN apk upgrade
 RUN rm -rf /run /tmp
 RUN ln -s /dev/shm /run
 RUN ln -s /dev/shm /tmp
+RUN mkdir /usr/local/etc
 
 RUN apk add nodejs
 
@@ -18,4 +19,5 @@ COPY root_cron /var/spool/cron/crontabs/root
 COPY bin /usr/local/bin/
 
 RUN rm -f /var/cache/apk/*
+RUN /usr/local/bin/make_build
 CMD [ "/sbin/init" ]
