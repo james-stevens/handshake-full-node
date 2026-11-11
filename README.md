@@ -13,16 +13,20 @@ By default, runs with `--no-sig0 --no-wallet`
 This container is designed to [run read-only](dkrun) and you will want your `hsd-data` to be persistant
 when the container is restarted, or it will have to reclone the entire blockchain every time it restarts.
 
-So you will need to map some persistant storage into this container at the mount point `/opt/hsd-data`.
-If you are mapping a directory from your docker host into the container, I found the host directory needs to
-be `chmod 777`.
+So you will need to map some persistant storage into this container at the mount point `/opt/data`.
+In this directory it will create the sub-directory `hsd-data` for all the HSD data.
 
 
 ## Env Vars
 
-### HSD_SYSLOG_SERVER
+### SYSLOG_SERVER
 
 IP Address of a port 514 syslog listener, if omitted syslogs to stdout.
+
+By default, it will log to `/opt/data/logs/messages`
+
+If you are running this container through something like `systemd` and you
+want it to log to `stdout`, then set `SYSLOG_STDOUT=Y`
 
 
 ### HSD_ADDITIONAL_PARAMS
