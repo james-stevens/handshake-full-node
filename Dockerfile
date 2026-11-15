@@ -19,5 +19,6 @@ COPY root_cron /var/spool/cron/crontabs/root
 COPY bin /usr/local/bin/
 
 RUN rm -f /var/cache/apk/*
-RUN /usr/local/bin/make_build
+
+COPY build.txt /usr/local/etc/build.txt
 CMD [ "/sbin/init" ]
