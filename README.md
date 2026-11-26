@@ -4,9 +4,21 @@ Container to run a Handshake Full Node v8.0.0
 Includes a daily cronjob to run `hsd-rpc compacttree` randomly at 3, 4 or 5am UTC (chance of 1 in 100),
 so it should run approx once every 33 days.
 
-Auth ROOT listens on port 153, Resolver listens on 253
+Auth ROOT listens on port 153, Resolver listens on 253, there's also a proxy that listening on port 53
+and will automatically split your DNS queries based on the `RD` flag (Recursion Desired).
 
-By default, runs with `--no-sig0 --no-wallet`
+Queries with `RD=0` will go to the ROOT service, queries with `RD=1` will go to the Resolver service.
+If you are using ISC'd `dig` utility, then `+norec` means `RD=0` and `+rec` means `RD=1`. `RD=1` is
+the default for ISC's `dig`.
+
+By default, `hsd` runs with `--no-sig0 --no-wallet` (see below)
+
+# Seeding
+
+When you ifrst run it, if your disk is blank, it will need to seed the entire blockchain. On my system
+this took about 48 hours & 80Gb of disk space. Once initially seeded, if you run `hsd-rpc compacttree`
+(inside the container) then it will reduce the disk space to about 43Gb (as of today).
+
 
 # Data Directory
 
@@ -80,5 +92,5 @@ Obviously, if you aren't changing the verion of `hsd`, you can omit the `Dockerf
 ## IMPORTANT
 
 NOTE: As described in the v8.0.0 release notes, I include the options `--chain-migrate=4 --wallet-migrate=7` 
-in the [run_hsd](bin/run_hsd) start script, so if you change to a different version, these options would 
+in the [run_hsd](bin/run_hsd) start script, so if you change to a different version, these options
 may also need to change, by editing that start script before you rebuild the container.
