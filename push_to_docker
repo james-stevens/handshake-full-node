@@ -3,8 +3,7 @@
 for me in $(cat list)
 do
 	id=$(docker image ls | awk '{ if($1=="'"${me}"'") print $3 }')
-	ver="$(date +%Y-%m-%d)"
-	if test "$1"; then ver="$1"; fi
+	ver="$(cat build.txt)"
 
 	docker tag ${id} jamesstevens/${me}
 	docker push jamesstevens/${me}
@@ -12,3 +11,5 @@ do
 	docker tag ${id} jamesstevens/${me}:${ver}
 	docker push jamesstevens/${me}:${ver}
 done
+
+test -f docker-README.md && ~/bin/dh_readme jamesstevens/$(basename ${PWD}) docker-README.md
